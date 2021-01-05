@@ -1,3 +1,4 @@
+package alocacao.estatica;
 
 public class ListaDeInteiros {
 	private int[] dados;
@@ -102,6 +103,25 @@ public class ListaDeInteiros {
 		}
 	}
 	
+	public int faz() {
+		int resp = -1;
+		if(vazia()) {
+			System.out.println("Erro");
+		}else {
+			resp = dados[0];
+			desloca(dados, dados.length-2);
+			tamanho--;
+		}
+		return resp;
+	}
+	
+	public void desloca(int vetor[], int i) {
+		if(i>=0) {
+			vetor[i] = vetor[i+1];
+			desloca(vetor, i-1);
+		}
+	}
+	
 	public int obtemPrimeira() {
 		return dados[0];
 	}
@@ -114,34 +134,25 @@ public class ListaDeInteiros {
 	public int obtemTamanho() {
 		return dados.length;
 
+	}	public String toString() {
+		String str = "";
+		for(int i=0; i<obtemTamanho(); i++) {
+			str += Integer.toString(dados[i]);
+			if(i<obtemTamanho()-1) {
+				str += " - ";
+			}
+		}
+		return str;
 	}
-
-	/*public static void main(String[] args) {
+	
+	public static void main(String[] args) {
 		ListaDeInteiros li = new ListaDeInteiros(5);
-		int j = 0;
-		while(j<5) {
-			li.adicionaFinal(j+1);
-			j++;
-		}
-		for(int i = 0; i < li.tamanho; i++) {
-			System.out.println(li.dados[i]);
-		}
-		
-		System.out.println();
-		
-		int fim = li.removeFinal();
-		for(int i = 0; i < li.tamanho; i++) {
-			System.out.println(li.dados[i]);
-		}
-		
-		System.out.println();
-		
-		fim = li.removeInicio();
-		for(int i = 0; i < li.tamanho; i++) {
-			System.out.println(li.dados[i]);
-		}
-
-
-	}*/
-
+		li.adicionaFinal(0);
+		li.adicionaFinal(3);
+		li.adicionaFinal(2);
+		li.faz();
+		li.adicionaFinal(1);
+		li.faz();
+		System.out.println(li.toString());
+	}
 }
